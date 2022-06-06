@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymManagerNET", "GymManager
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymManagerNET.Core", "GymManagerNET.Core\GymManagerNET.Core.csproj", "{CBBE72BB-ED46-452B-8A98-B38AA4083786}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymManagerNET.Data", "GymManagerNET.Data\GymManagerNET.Data.csproj", "{72030EDA-3E37-4DAB-9CE9-7E4F0B8A3C65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymManagerNET.Data", "GymManagerNET.Data\GymManagerNET.Data.csproj", "{72030EDA-3E37-4DAB-9CE9-7E4F0B8A3C65}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -4,7 +4,7 @@ namespace GymManagerNET.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class HomeController
+    public class HomeController : ControllerBase
     {
 
     }
