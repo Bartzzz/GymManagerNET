@@ -28,44 +28,42 @@ public class AuthenticationController : Controller
     [HttpPost("createToken")]
     public async Task<IActionResult> CreateToken([FromBody] EmployeeDto employee)
     {
-        if (ModelState.IsValid)
+        if (!ModelState.IsValid) return BadRequest();
+        var user = await _userManager.FindByNameAsync(employee.Username);
+        if (user != null)
         {
-            var user = await _userManager.FindByNameAsync(employee.Username);
-            if (user != null)
-            {
-                var result = await _signInManager.CheckPasswordSignInAsync(user, employee.Password, false);
+            var result = await _signInManager.CheckPasswordSignInAsync(user, employee.Password, false);
 
-                if (result.Succeeded)
+            if (result.Succeeded)
+            {
+                // Create the Token
+                var claims = new[]
                 {
-                    // Create the Token
-                    var claims = new[]
-                    {
-                            new Claim(JwtRegisteredClaimNames.Sub, user.Email),
-                            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                            new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),
-                            new Claim(ClaimTypes.Role, user.UserType)
-                    };
+                    new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),
+                    new Claim(ClaimTypes.Role, user.UserType)
+                };
                     
 
-                    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));
 
-                    var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-                    var token = new JwtSecurityToken(
-                        _config["Tokens:Issuer"],
-                        _config["Tokens:Audience"],
-                        claims,
-                        expires: DateTime.UtcNow.AddMinutes(30),
-                        signingCredentials: creds);
+                var token = new JwtSecurityToken(
+                    _config["Tokens:Issuer"],
+                    _config["Tokens:Audience"],
+                    claims,
+                    expires: DateTime.UtcNow.AddMinutes(30),
+                    signingCredentials: creds);
 
-                    var results = new
-                    {
-                        token = new JwtSecurityTokenHandler().WriteToken(token),
-                        expiration = token.ValidTo
-                    };
+                var results = new
+                {
+                    token = new JwtSecurityTokenHandler().WriteToken(token),
+                    expiration = token.ValidTo
+                };
 
-                    return Created("", results);
-                }
+                return Created("", results);
             }
         }
 

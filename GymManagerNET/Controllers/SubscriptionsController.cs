@@ -1,6 +1,6 @@
 ﻿using GymManagerNET.Core.Enums;
 using GymManagerNET.Core.Models.DTOs.Subscriptions;
-using GymManagerNET.Core.Services.SubscriptionService;
+using GymManagerNET.Core.Services.Subscriptions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

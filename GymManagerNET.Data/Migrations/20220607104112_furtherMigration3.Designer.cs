@@ -4,6 +4,7 @@ using GymManagerNET.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GymManagerNET.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220607104112_furtherMigration3")]
+    partial class furtherMigration3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,30 +23,6 @@ namespace GymManagerNET.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("GymManagerNET.Core.Models.Activity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MaximumAttendants")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Activities");
-                });
 
             modelBuilder.Entity("GymManagerNET.Core.Models.FitnessRoom", b =>
                 {
@@ -59,42 +37,7 @@ namespace GymManagerNET.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FitnessRooms");
-                });
-
-            modelBuilder.Entity("GymManagerNET.Core.Models.RoomBooking", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("ActivityId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("DayOfWeek")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Duration")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RoomId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("StartTime")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ActivityId");
-
-                    b.HasIndex("RoomId");
-
-                    b.ToTable("RoomBookings");
+                    b.ToTable("FitnessRoom");
                 });
 
             modelBuilder.Entity("GymManagerNET.Core.Models.Subscription", b =>
@@ -390,25 +333,6 @@ namespace GymManagerNET.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("GymManagerNET.Core.Models.RoomBooking", b =>
-                {
-                    b.HasOne("GymManagerNET.Core.Models.Activity", "Activity")
-                        .WithMany("Bookings")
-                        .HasForeignKey("ActivityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GymManagerNET.Core.Models.FitnessRoom", "Room")
-                        .WithMany("Bookings")
-                        .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Activity");
-
-                    b.Navigation("Room");
-                });
-
             modelBuilder.Entity("GymManagerNET.Core.Models.Subscription", b =>
                 {
                     b.HasOne("GymManagerNET.Core.Models.Users.Client", "User")
@@ -480,16 +404,6 @@ namespace GymManagerNET.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("GymManagerNET.Core.Models.Activity", b =>
-                {
-                    b.Navigation("Bookings");
-                });
-
-            modelBuilder.Entity("GymManagerNET.Core.Models.FitnessRoom", b =>
-                {
-                    b.Navigation("Bookings");
                 });
 
             modelBuilder.Entity("GymManagerNET.Core.Models.Users.Client", b =>

@@ -4,6 +4,7 @@ using GymManagerNET.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GymManagerNET.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220607154408_furtherMigration4")]
+    partial class furtherMigration4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,7 +45,7 @@ namespace GymManagerNET.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Activities");
+                    b.ToTable("Activity");
                 });
 
             modelBuilder.Entity("GymManagerNET.Core.Models.FitnessRoom", b =>
@@ -59,7 +61,7 @@ namespace GymManagerNET.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FitnessRooms");
+                    b.ToTable("FitnessRoom");
                 });
 
             modelBuilder.Entity("GymManagerNET.Core.Models.RoomBooking", b =>
@@ -92,9 +94,7 @@ namespace GymManagerNET.Data.Migrations
 
                     b.HasIndex("ActivityId");
 
-                    b.HasIndex("RoomId");
-
-                    b.ToTable("RoomBookings");
+                    b.ToTable("RoomBooking");
                 });
 
             modelBuilder.Entity("GymManagerNET.Core.Models.Subscription", b =>
@@ -150,7 +150,12 @@ namespace GymManagerNET.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("TrainerId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("TrainerId");
 
                     b.ToTable("Clients");
                 });
@@ -165,6 +170,10 @@ namespace GymManagerNET.Data.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -232,6 +241,8 @@ namespace GymManagerNET.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("DefaultEmployee");
                 });
 
             modelBuilder.Entity("GymManagerNET.Core.Models.Users.FingerPrint", b =>
@@ -390,6 +401,13 @@ namespace GymManagerNET.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("GymManagerNET.Core.Models.Users.Trainer", b =>
+                {
+                    b.HasBaseType("GymManagerNET.Core.Models.Users.DefaultEmployee");
+
+                    b.HasDiscriminator().HasValue("Trainer");
+                });
+
             modelBuilder.Entity("GymManagerNET.Core.Models.RoomBooking", b =>
                 {
                     b.HasOne("GymManagerNET.Core.Models.Activity", "Activity")
@@ -398,15 +416,7 @@ namespace GymManagerNET.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GymManagerNET.Core.Models.FitnessRoom", "Room")
-                        .WithMany("Bookings")
-                        .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Activity");
-
-                    b.Navigation("Room");
                 });
 
             modelBuilder.Entity("GymManagerNET.Core.Models.Subscription", b =>
@@ -418,6 +428,13 @@ namespace GymManagerNET.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("GymManagerNET.Core.Models.Users.Client", b =>
+                {
+                    b.HasOne("GymManagerNET.Core.Models.Users.Trainer", null)
+                        .WithMany("ManagedClients")
+                        .HasForeignKey("TrainerId");
                 });
 
             modelBuilder.Entity("GymManagerNET.Core.Models.Users.FingerPrint", b =>
@@ -487,16 +504,16 @@ namespace GymManagerNET.Data.Migrations
                     b.Navigation("Bookings");
                 });
 
-            modelBuilder.Entity("GymManagerNET.Core.Models.FitnessRoom", b =>
-                {
-                    b.Navigation("Bookings");
-                });
-
             modelBuilder.Entity("GymManagerNET.Core.Models.Users.Client", b =>
                 {
                     b.Navigation("FingerPrint");
 
                     b.Navigation("Subscriptions");
+                });
+
+            modelBuilder.Entity("GymManagerNET.Core.Models.Users.Trainer", b =>
+                {
+                    b.Navigation("ManagedClients");
                 });
 #pragma warning restore 612, 618
         }

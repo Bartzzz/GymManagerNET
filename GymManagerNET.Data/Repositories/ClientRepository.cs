@@ -11,11 +11,11 @@ public class ClientRepository : IClientRepository
     {
         _context = context;
     }
-    public Task<Client> Add(Client client)
+    public async Task<Client> Add(Client client)
     {
-        _context.Add(client);
+       await _context.AddAsync(client);
 
-        return Commit(client);
+        return await Commit(client);
     }
 
     public async Task<Client> Delete(int userId)

@@ -2,7 +2,7 @@
 using GymManagerNET.Core.DTOs.Users;
 using GymManagerNET.Core.Enums;
 using GymManagerNET.Core.Models.Users;
-using GymManagerNET.Core.Services.SubscriptionService;
+using GymManagerNET.Core.Services.Subscriptions;
 using GymManagerNET.Core.Services.UserService;
 
 namespace GymManagerNET.Core.Services.ClientService;

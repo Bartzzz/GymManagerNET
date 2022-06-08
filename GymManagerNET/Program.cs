@@ -1,8 +1,6 @@
-﻿using GymManager.Core.Services.SubscriptionService;
-using GymManager.Data;
+﻿using GymManager.Data;
 using GymManagerNET.Core.Models.Users;
 using GymManagerNET.Core.Services.ClientService;
-using GymManagerNET.Core.Services.SubscriptionService;
 using GymManagerNET.Core.Services.UserService;
 using GymManagerNET.Data;
 using GymManagerNET.Data.Repositories;
@@ -12,6 +10,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using GymManagerNET.Core.Services.Activity;
+using GymManagerNET.Core.Services.RoomBookings;
+using GymManagerNET.Core.Services.Subscriptions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,9 +41,20 @@ builder.Services.AddAuthentication().AddJwtBearer(config =>
 builder.Services.AddDbContextPool<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("GymManagerDB")));
 
 builder.Services.AddScoped<IClientService, ClientService>();
+builder.Services.AddScoped<IClientRepository, ClientRepository>();
+
 builder.Services.AddScoped<ISubscriptionService, SubscriptionService>();
 builder.Services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
-builder.Services.AddScoped<IClientRepository, ClientRepository>();
+
+builder.Services.AddScoped<IRoomService, RoomService>();
+builder.Services.AddScoped<IRoomRepository, RoomRepository>();
+
+builder.Services.AddScoped<IRoomBookingService, RoomBookingService>();
+builder.Services.AddScoped<IRoomBookingRepository, RoomBookingRepository>();
+
+builder.Services.AddScoped<IActivityService, ActivityService>();
+builder.Services.AddScoped<IActivityRepository, ActivityRepository>();
+
 
 
 builder.Services.AddControllers();

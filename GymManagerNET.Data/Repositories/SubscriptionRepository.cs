@@ -1,10 +1,10 @@
 ﻿using GymManagerNET.Core.Models;
-using GymManagerNET.Core.Services.SubscriptionService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GymManagerNET.Core.Services.Subscriptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace GymManagerNET.Data.Repositories

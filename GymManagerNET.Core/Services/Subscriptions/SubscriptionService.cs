@@ -3,9 +3,8 @@ using GymManager.Core.DTOs.Subscriptions;
 using GymManagerNET.Core.Enums;
 using GymManagerNET.Core.Models;
 using GymManagerNET.Core.Models.DTOs.Subscriptions;
-using GymManagerNET.Core.Services.SubscriptionService;
 
-namespace GymManager.Core.Services.SubscriptionService;
+namespace GymManagerNET.Core.Services.Subscriptions;
 
         public class SubscriptionService : ISubscriptionService
         {
