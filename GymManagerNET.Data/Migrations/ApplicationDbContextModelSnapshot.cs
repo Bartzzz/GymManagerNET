@@ -252,7 +252,8 @@ namespace GymManagerNET.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("FingerPrint");
                 });
@@ -423,8 +424,8 @@ namespace GymManagerNET.Data.Migrations
             modelBuilder.Entity("GymManagerNET.Core.Models.Users.FingerPrint", b =>
                 {
                     b.HasOne("GymManagerNET.Core.Models.Users.Client", "User")
-                        .WithMany("FingerPrint")
-                        .HasForeignKey("UserId")
+                        .WithOne("FingerPrint")
+                        .HasForeignKey("GymManagerNET.Core.Models.Users.FingerPrint", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -494,7 +495,8 @@ namespace GymManagerNET.Data.Migrations
 
             modelBuilder.Entity("GymManagerNET.Core.Models.Users.Client", b =>
                 {
-                    b.Navigation("FingerPrint");
+                    b.Navigation("FingerPrint")
+                        .IsRequired();
 
                     b.Navigation("Subscriptions");
                 });

@@ -10,12 +10,15 @@ public class ClientService : IClientService
 
     private readonly ISubscriptionService _subscriptionService;
     private readonly IClientRepository _clientRepository;
+    private readonly IFingerPrintService _fingerPrintService;
+    private readonly IFingerPrintRepository _fingerPrintRepository;
     private readonly IMapper _mapper;
 
-    public ClientService(ISubscriptionService subscriptionService, IClientRepository clientRepository, IMapper mapper)
+    public ClientService(ISubscriptionService subscriptionService, IClientRepository clientRepository, IFingerPrintService fingerPrintService, IMapper mapper)
     {
         _subscriptionService = subscriptionService;
         _clientRepository = clientRepository;
+        _fingerPrintService = fingerPrintService;
         _mapper = mapper;
     }
     public async Task<IEnumerable<ClientDto>> GetClients()
@@ -28,9 +31,13 @@ public class ClientService : IClientService
             return null;
         }
 
-        foreach (var userDto in clientDtos)
+        foreach (var clientDto in clientDtos)
         {
-            userDto.Subscriptions = await _subscriptionService.GetSubscriptions(userDto.Id);
+            clientDto.Subscriptions = await _subscriptionService.GetSubscriptions(clientDto.Id);
+        }
+        foreach (var clientDto in clientDtos)
+        {
+            clientDto.FingerPrint = await _fingerPrintService.GetFingerPrint(clientDto.Id);
         }
 
         return clientDtos;
@@ -47,6 +54,7 @@ public class ClientService : IClientService
         }
 
         clientDto.Subscriptions = await _subscriptionService.GetSubscriptions(client.Id);
+        clientDto.FingerPrint = await _fingerPrintService.GetFingerPrint(clientDto.Id);
 
         return clientDto;
     }

@@ -10,6 +10,7 @@ namespace GymManagerNET.Core.DTOs.Users
     {
         public DateTime LastEntrance { get; set; }
         public IEnumerable<SubscriptionDto> Subscriptions { get; set; }
-        public IEnumerable<FingerPrint> FingerPrint { get; set; } = new List<FingerPrint>();
+
+        public FingerPrintDto FingerPrint { get; set; }
     }
 }

@@ -71,7 +71,7 @@ namespace GymManager.Data
                     new Client()
                     {
                         Name = "Janko",
-                        Surname = "Musykant",
+                        Surname = "Mant",
                         Email = "jmuzykant@migusgym.com",
                         Subscriptions = new List<Subscription>()
                         {
@@ -80,7 +80,47 @@ namespace GymManager.Data
                                 SubscriptionType = SubscriptionType.CountedEntrances,
                                 EntrancesLeft = 10,
                                 StartDate = DateTime.Now
-                            },
+                            }
+                        }
+                    },
+                    new Client()
+                    {
+                        Name = "Janko",
+                        Surname = "Andrzej",
+                        Email = "jmuzykant2@migusgym.com",
+                        Subscriptions = new List<Subscription>()
+                        {
+                            new Subscription()
+                            {
+                                SubscriptionType = SubscriptionType.CountedEntrances,
+                                EntrancesLeft = 10,
+                                StartDate = DateTime.Now
+                            }
+                        }
+                    },
+                    new Client()
+                    {
+                        Name = "Janko",
+                        Surname = "Muzykant",
+                        Email = "jmuzykant3@migusgym.com",
+                        Subscriptions = new List<Subscription>()
+                        {
+                            new Subscription()
+                            {
+                                SubscriptionType = SubscriptionType.Monthly,
+                                EntrancesLeft = 0,
+                                StartDate = DateTime.Now.AddMonths(-2)
+                            }
+
+                        }
+                    },
+                    new Client()
+                    {
+                        Name = "John",
+                        Surname = "Musicman",
+                        Email = "jmuzykant4@migusgym.com",
+                        Subscriptions = new List<Subscription>()
+                        {
                             new Subscription()
                             {
                                 SubscriptionType = SubscriptionType.Monthly,

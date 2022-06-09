@@ -21,15 +21,18 @@ public class FingerPrintService : IFingerPrintService
         }
         public async Task<List<FingerPrintDto>> GetFingerPrints()
         {
-        var fingerprints = await _fingerPrintRepository.GetEntities();
-        var fingerprintDtos = fingerprints != null ? _mapper.Map<IEnumerable<FingerPrintDto>>(fingerprints) : null;
+            var fingerprints = await _fingerPrintRepository.GetEntities();
+            var fingerprintDtos = fingerprints != null ? _mapper.Map<IEnumerable<FingerPrintDto>>(fingerprints) : null;
+            
+            return fingerprintDtos?.ToList();
+        }
 
-        return fingerprintDtos?.ToList();
-    }
-
-        public Task<FingerPrintDto> GetFingerPrint(int UserId)
+        public async Task<FingerPrintDto> GetFingerPrint(int userId)
         {
-            throw new NotImplementedException();
+            var fingerprints = await _fingerPrintRepository.GetById(userId);
+            var fingerprintDto = fingerprints != null ? _mapper.Map<FingerPrintDto>(fingerprints) : null;
+
+            return fingerprintDto;
         }
 
         public async Task<FingerPrintDto> SaveFingerPrint(FingerPrintDto fingerPrint)

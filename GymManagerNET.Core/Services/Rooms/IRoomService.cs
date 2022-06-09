@@ -4,7 +4,7 @@ namespace GymManagerNET.Core.Services.RoomBookings;
 
 public interface IRoomService
 {
-    Task<RoomDto?> GetRooms();
+    Task<IEnumerable<RoomDto?>> GetRooms();
     Task<RoomDto?> GetRoom(int roomId);
     Task<RoomDto?> AddRoom(RoomDto room);
     Task<RoomDto?> UpdateRoom(object room);

@@ -1,11 +1,7 @@
-﻿using GymManager.Data;
-using GymManagerNET.Core.Models;
+﻿using GymManagerNET.Core.Models;
 using GymManagerNET.Core.Models.Users;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace GymManagerNET.Data;
 
@@ -31,8 +27,8 @@ public class ApplicationDbContext : IdentityDbContext<DefaultEmployee>
 
         modelBuilder.Entity<FingerPrint>()
             .HasOne(p => p.User)
-            .WithMany(b => b.FingerPrint)
-            .HasForeignKey(p => p.UserId);
+            .WithOne(b => b.FingerPrint)
+            .HasForeignKey<FingerPrint>(p => p.UserId);
 
         modelBuilder.Entity<RoomBooking>()
             .HasOne(p => p.Activity)

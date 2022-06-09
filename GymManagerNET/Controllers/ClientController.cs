@@ -102,17 +102,4 @@ public class ClientController : Controller
 
         return Ok(enteringClient);
     }
-
-    [HttpPut("submitFingerprint")]
-    public async Task<IActionResult> SubmitFingerPrint(FingerPrint fingerPrint)
-    {
-        var updatedClient = new ClientDto() { FingerPrint = new List<FingerPrint>(){ fingerPrint } };
-      var result = await _clientService.UpdateClient(updatedClient);
-
-        if (result == null)
-        {
-            return NotFound();
-        }
-        return Ok(result);
-    }
 }
