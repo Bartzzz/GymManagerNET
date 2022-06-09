@@ -1,6 +1,6 @@
 ﻿using GymManagerNET.Core.DTOs.Users;
 
-namespace GymManagerNET.Core.Services.UserService
+namespace GymManagerNET.Core.Services.Client
 {
     public interface IClientService
     {

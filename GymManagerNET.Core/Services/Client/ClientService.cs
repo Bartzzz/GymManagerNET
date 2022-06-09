@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
 using GymManagerNET.Core.DTOs.Users;
 using GymManagerNET.Core.Enums;
-using GymManagerNET.Core.Models.Users;
 using GymManagerNET.Core.Services.Subscriptions;
-using GymManagerNET.Core.Services.UserService;
 
-namespace GymManagerNET.Core.Services.ClientService;
+namespace GymManagerNET.Core.Services.Client;
 
 public class ClientService : IClientService
 {
@@ -55,14 +53,14 @@ public class ClientService : IClientService
 
     public async Task<ClientDto> AddClient(ClientDto client)
     {
-        var addedClient = await _clientRepository.Add(_mapper.Map<Client>(client));
+        var addedClient = await _clientRepository.Add(_mapper.Map<Models.Users.Client>(client));
 
         return addedClient != null ? _mapper.Map<ClientDto>(addedClient) : null;
     }
 
     public async Task<ClientDto> UpdateClient(ClientDto client)
     {
-        var updatedClient = await _clientRepository.UpdateAsync(_mapper.Map<Client>(client));
+        var updatedClient = await _clientRepository.UpdateAsync(_mapper.Map<Models.Users.Client>(client));
 
         return updatedClient != null ? _mapper.Map<ClientDto>(updatedClient) : null;
     }

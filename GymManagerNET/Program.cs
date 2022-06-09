@@ -1,7 +1,5 @@
 ﻿using GymManager.Data;
 using GymManagerNET.Core.Models.Users;
-using GymManagerNET.Core.Services.ClientService;
-using GymManagerNET.Core.Services.UserService;
 using GymManagerNET.Data;
 using GymManagerNET.Data.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -11,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using GymManagerNET.Core.Services.Activity;
+using GymManagerNET.Core.Services.Client;
 using GymManagerNET.Core.Services.RoomBookings;
 using GymManagerNET.Core.Services.Subscriptions;
 
@@ -54,6 +53,11 @@ builder.Services.AddScoped<IRoomBookingRepository, RoomBookingRepository>();
 
 builder.Services.AddScoped<IActivityService, ActivityService>();
 builder.Services.AddScoped<IActivityRepository, ActivityRepository>();
+
+builder.Services.AddScoped<IFingerPrintService, FingerPrintService>();
+builder.Services.AddScoped<IFingerPrintRepository, FingerPrintRepository>();
+
+
 
 
 

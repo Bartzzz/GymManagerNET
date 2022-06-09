@@ -1,9 +1,8 @@
-﻿using GymManagerNET.Core.Models.Users;
-using GymManagerNET.Core.Services.Base;
+﻿using GymManagerNET.Core.Services.Base;
 
-namespace GymManagerNET.Core.Services.UserService
+namespace GymManagerNET.Core.Services.Client
 {
-    public interface IClientRepository: IBaseRepository<Client>
+    public interface IClientRepository: IBaseRepository<Models.Users.Client>
     {
     }
 }

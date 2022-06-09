@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymManagerNET.Core", "GymMa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymManagerNET.Data", "GymManagerNET.Data\GymManagerNET.Data.csproj", "{72030EDA-3E37-4DAB-9CE9-7E4F0B8A3C65}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymManagerNET.Tests", "GymManagerNET.Tests\GymManagerNET.Tests.csproj", "{D0EC04A6-2EEC-4AC1-80E8-D980A9305977}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{72030EDA-3E37-4DAB-9CE9-7E4F0B8A3C65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72030EDA-3E37-4DAB-9CE9-7E4F0B8A3C65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72030EDA-3E37-4DAB-9CE9-7E4F0B8A3C65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0EC04A6-2EEC-4AC1-80E8-D980A9305977}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0EC04A6-2EEC-4AC1-80E8-D980A9305977}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0EC04A6-2EEC-4AC1-80E8-D980A9305977}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0EC04A6-2EEC-4AC1-80E8-D980A9305977}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

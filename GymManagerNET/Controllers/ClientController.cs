@@ -1,7 +1,7 @@
 ﻿using GymManagerNET.Core.DTOs.Users;
 using GymManagerNET.Core.Enums;
 using GymManagerNET.Core.Models.Users;
-using GymManagerNET.Core.Services.UserService;
+using GymManagerNET.Core.Services.Client;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

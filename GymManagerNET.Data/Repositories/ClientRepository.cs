@@ -1,5 +1,5 @@
 ﻿using GymManagerNET.Core.Models.Users;
-using GymManagerNET.Core.Services.UserService;
+using GymManagerNET.Core.Services.Client;
 using Microsoft.EntityFrameworkCore;
 
 namespace GymManagerNET.Data.Repositories;
